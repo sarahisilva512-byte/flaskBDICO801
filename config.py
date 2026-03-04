@@ -1,12 +1,14 @@
+# config.py
+
+
 import os
 from sqlalchemy import create_engine
 
 class Config(object):
     SECRET_KEY = "claveSecreta"
-    SESSION_COOCKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False   
 
-
-class developmentConfig(Config):
+class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymsql://Sarahi:root@localhost/ico801'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://Sarahi:root@localhost/ico801'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
