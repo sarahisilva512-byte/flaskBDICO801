@@ -1,0 +1,64 @@
+#alumnos.html
+
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="py-10">
+    <!-- Botón Nuevo Alumno -->
+    <a href="/alumnos/nuevo" 
+       class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 inline-block mb-6 font-medium">
+        Nuevo Alumno
+    </a>
+
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Lista de Alumnos</h2>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 border border-gray-200 rounded-lg">
+            <thead class="bg-gray-50 text-xs uppercase">
+                <tr>
+                    <th class="px-6 py-4">Nombre</th>
+                    <th class="px-6 py-4">Apellido Paterno</th>
+                    <th class="px-6 py-4">Email</th>
+                    <th class="px-6 py-4">Fecha Creación</th>
+                    <th class="px-6 py-4 text-center">Cursos</th>
+                    <th class="px-6 py-4 text-right">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+                {% for alum in alumnos %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 font-medium">{{ alum.nombre }}</td>
+                    <td class="px-6 py-4">{{ alum.apaterno }}</td>
+                    <td class="px-6 py-4">{{ alum.email }}</td>
+                    <td class="px-6 py-4 text-gray-500">
+                        {{ alum.created_date.strftime('%d/%m/%Y %H:%M') }}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <a href="/consultas/alumno/{{ alum.id }}/cursos" 
+                           class="text-blue-600 hover:underline font-medium">
+                            Ver cursos
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 text-right space-x-2">
+                        <a href="/alumnos/editar/{{ alum.id }}" 
+                           class="bg-orange-500 text-white px-4 py-2 text-xs rounded hover:bg-orange-600">
+                            Editar
+                        </a>
+                        <a href="/alumnos/eliminar/{{ alum.id }}" 
+                           class="bg-red-500 text-white px-4 py-2 text-xs rounded hover:bg-red-600"
+                           onclick="return confirm('¿Eliminar alumno?')">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if not alumnos %}
+    <p class="text-center text-gray-400 mt-8">No hay alumnos registrados aún.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

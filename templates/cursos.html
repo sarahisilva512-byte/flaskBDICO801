@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="bg-white p-8 rounded shadow-md">
+
+    <h2 class="text-2xl font-bold mb-6">Cursos</h2>
+
+    <!-- FORM -->
+    <form method="POST" class="space-y-4 mb-8">
+
+        <input type="text" name="nombre" placeholder="Nombre del curso"
+            class="border p-2 w-full rounded" required>
+
+        <select name="maestro_id" class="border p-2 w-full rounded" required>
+            <option value="">Selecciona maestro</option>
+            {% for m in maestros %}
+            <option value="{{ m.id }}">{{ m.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Crear Curso"
+            class="bg-purple-600 text-white px-4 py-2 rounded">
+    </form>
+
+    <!-- TABLA -->
+    <table class="w-full border">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="p-3">Curso</th>
+                <th class="p-3">Maestro</th>
+                <th class="p-3">Alumnos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for c in cursos %}
+            <tr class="border-t">
+                <td class="p-3">{{ c.nombre }}</td>
+                <td class="p-3">{{ c.maestro.nombre }}</td>
+                <td class="p-3 text-center">
+                    <a href="/consultas/curso/{{ c.id }}/alumnos"
+                       class="text-blue-600 hover:underline">
+                        Ver alumnos
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
