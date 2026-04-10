@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto mt-10">
+    <div class="bg-white shadow-2xl rounded-3xl p-10 text-center">
+    
+        <div class="mx-auto w-32 h-32 bg-green-100 text-green-600 rounded-3xl flex items-center justify-center mb-8 shadow-inner">
+            <i class="fas fa-chalkboard-teacher text-7xl"></i>
+        </div>
+
+
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">
+            {{ maestro.nombre }} {{ maestro.apellidos }}
+        </h1>
+        
+  
+        <p class="text-xl text-gray-600 mb-10">{{ maestro.especialidad }}</p>
+
+   
+        <div class="bg-gray-50 rounded-2xl p-8 mb-10 space-y-8 text-left">
+            <div class="flex justify-between items-center border-b pb-6">
+                <span class="text-sm font-medium text-gray-500">Matrícula</span>
+                <span class="font-semibold text-gray-800 text-lg">{{ maestro.matricula }}</span>
+            </div>
+            
+            <div class="flex justify-between items-center border-b pb-6">
+                <span class="text-sm font-medium text-gray-500">Correo Electrónico</span>
+                <span class="font-semibold text-gray-800 text-lg">{{ maestro.email }}</span>
+            </div>
+            
+            {% if maestro.cursos %}
+            <div class="flex justify-between items-center">
+                <span class="text-sm font-medium text-gray-500">Cursos asignados</span>
+                <span class="font-semibold text-gray-800 text-lg">{{ maestro.cursos|length }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('maestros.maestros') }}" 
+           class="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-2xl font-medium transition-all">
+            <i class="fas fa-arrow-left"></i>
+            Regresar a la Lista
+        </a>
+    </div>
+</div>
+
+{% endblock %}

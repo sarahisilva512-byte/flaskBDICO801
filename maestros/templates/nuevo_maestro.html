@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+
+<div class="max-w-lg mx-auto bg-white shadow-2xl rounded-3xl p-10 mt-10">
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Registrar Nuevo Maestro</h2>
+
+    <form action="{{ url_for('maestros.maestros') }}" method="POST" novalidate>
+        {{ form.csrf_token }}
+
+        {{ macros.campoNuevo(form.matricula) }}
+        {{ macros.campoNuevo(form.nombre) }}
+        {{ macros.campoNuevo(form.apellidos) }}
+        {{ macros.campoNuevo(form.especialidad) }}
+        {{ macros.campoNuevo(form.correo) }}
+
+        <div class="flex gap-4 mt-12">
+            <button type="submit" 
+                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-2xl transition-all duration-200">
+                Guardar Maestro
+            </button>
+            <a href="{{ url_for('maestros.maestros') }}" 
+               class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-2xl text-center transition-all duration-200">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
