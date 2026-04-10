@@ -1,28 +1,70 @@
 {% extends "layout.html" %}
-
 {% block content %}
 
-<div class="text-center mt-20">
+<div class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Sistema Escolar</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Gestión Integral de Alumnos, Maestros, Cursos e Inscripciones
+            </p>
+        </div>
 
-    <h1 class="text-4xl font-bold mb-10">Sistema Escolar</h1>
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-    <div class="space-x-4">
-        <a href="{{ url_for('usuario') }}" 
-           class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">
-            Alumnos
-        </a>
+            <!-- Alumnos -->
+            <a href="{{ url_for('alumnos') }}" 
+               class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="h-56 bg-blue-500 flex items-center justify-center">
+                    <i class="fas fa-users text-8xl text-white"></i>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-2">Alumnos</h3>
+                    <p class="text-gray-600">Gestión de estudiantes</p>
+                </div>
+            </a>
 
-        <a href="{{ url_for('maestros') }}" 
-           class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">
-            Maestros
-        </a>
+            <!-- Maestros -->
+            <a href="{{ url_for('maestros.maestros') }}" 
+               class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="h-56 bg-green-500 flex items-center justify-center">
+                    <i class="fas fa-chalkboard-teacher text-8xl text-white"></i>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-2">Maestros</h3>
+                    <p class="text-gray-600">Gestión de profesores</p>
+                </div>
+            </a>
 
-        <a href="{{ url_for('cursos') }}" 
-           class="bg-purple-600 text-white px-6 py-3 rounded hover:bg-purple-700">
-            Cursos
-        </a>
+            <!-- Cursos -->
+            <a href="{{ url_for('cursos.cursos') }}" 
+               class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="h-56 bg-purple-500 flex items-center justify-center">
+                    <i class="fas fa-book text-8xl text-white"></i>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-2">Cursos</h3>
+                    <p class="text-gray-600">Gestión de materias</p>
+                </div>
+            </a>
+
+            <!-- Inscripciones -->
+            <a href="{{ url_for('inscripciones.inscripciones') }}" 
+               class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="h-56 bg-orange-500 flex items-center justify-center">
+                    <i class="fas fa-user-plus text-8xl text-white"></i>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-2">Inscripciones</h3>
+                    <p class="text-gray-600">Inscribir alumnos en cursos</p>
+                </div>
+            </a>
+
+        </div>
     </div>
-
 </div>
 
 {% endblock %}

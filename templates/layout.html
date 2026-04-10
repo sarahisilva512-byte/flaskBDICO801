@@ -4,29 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Escolar</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+<body class="bg-gray-50 font-sans">
 
-<body class="bg-gray-100">
-
-    <!-- NAVBAR -->
-    <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Navbar -->
+     
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-3">
+                Sistema Escolar
+            </h1>
             
-            <h1 class="text-xl font-bold">Sistema Escolar</h1>
-
-            <div class="space-x-6">
-                <a href="{{ url_for('index') }}" class="hover:text-blue-600">Inicio</a>
-                <a href="{{ url_for('usuario') }}" class="hover:text-blue-600">Alumnos</a>
-                <a href="{{ url_for('maestros') }}" class="hover:text-blue-600">Maestros</a>
-                <a href="{{ url_for('cursos') }}" class="hover:text-blue-600">Cursos</a>
+            <div class="space-x-8 text-sm font-medium">
+                <a href="{{ url_for('index') }}" class="hover:text-blue-600 transition-colors">Inicio</a>
+                <a href="{{ url_for('alumnos') }}" class="hover:text-blue-600 transition-colors">Alumnos</a>
+                <a href="{{ url_for('maestros.maestros') }}" class="hover:text-blue-600 transition-colors">Maestros</a>
+                <a href="{{ url_for('cursos.cursos') }}" class="hover:text-blue-600 transition-colors">Cursos</a>
+                <a href="{{ url_for('inscripciones.inscripciones') }}" class="hover:text-blue-600 transition-colors">Inscripciones</a>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto mt-10">
+    <!-- Contenido principal -->
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        
+        <!-- Mensajes Flash -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mb-8 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-2xl text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
         {% block content %}{% endblock %}
+        
     </div>
 
 </body>
