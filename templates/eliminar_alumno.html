@@ -5,7 +5,6 @@
 
 <div class="max-w-lg mx-auto bg-white shadow-2xl rounded-3xl p-10 mt-10">
     
-    <!-- Encabezado de advertencia -->
     <div class="text-center mb-10">
         <div class="mx-auto w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mb-4">
             <i class="fas fa-exclamation-triangle text-4xl"></i>
@@ -14,10 +13,10 @@
         <p class="text-gray-600 text-lg">Esta acción no se puede deshacer.</p>
     </div>
 
-    <form action="" method="POST" novalidate>
+    <form action="{{ url_for('alumnos.eliminar_alumno') }}" method="POST" novalidate>
         {{ form.csrf_token }}
+        <input type="hidden" name="id" value="{{ form.id.data }}">
 
-        <!-- Datos del alumno -->
         <div class="bg-gray-50 rounded-2xl p-7 mb-10 space-y-5">
             {{ macros.campoNuevo(form.id) }}
             {{ macros.campoNuevo(form.nombre) }}
@@ -27,13 +26,12 @@
         </div>
 
         <div class="flex gap-4">
-            <button type="submit" 
+            <button type="submit"
                     class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 rounded-2xl transition-all duration-200"
-                    onclick="return confirm('¿Estás seguro de eliminar este alumno? Esta acción es irreversible.')">
+                    onclick="return confirm('¿Estás completamente seguro de eliminar este alumno? Esta acción es irreversible.')">
                 Sí, Eliminar Alumno
             </button>
-            
-            <a href="{{ url_for('alumnos') }}" 
+            <a href="{{ url_for('alumnos.alumnos') }}"
                class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-2xl text-center transition-all duration-200">
                 Cancelar
             </a>
