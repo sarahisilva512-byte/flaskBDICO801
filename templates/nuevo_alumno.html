@@ -19,7 +19,7 @@
         {% endif %}
     {% endwith %}
 
-    <form action="{{ url_for('alumnos.alumnos') }}" method="POST" novalidate>
+    <form action="{{ url_for('alumnos.nuevo_alumno') }}" method="POST" novalidate>
         {{ form.hidden_tag() }}
         
         {{ macros.campoNuevo(form.id) }}

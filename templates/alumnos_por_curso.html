@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Alumnos inscritos en</h1>
+            <p class="text-4xl font-semibold text-purple-600 mt-1">{{ curso.nombre }}</p>
+            {% if curso.maestro %}
+                <p class="text-gray-600 mt-2">
+                    Maestro: <span class="font-medium">{{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}</span>
+                </p>
+            {% endif %}
+        </div>
+        
+        <a href="{{ url_for('consultas.consultas') }}" 
+           class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-2xl font-medium flex items-center gap-2 transition-all">
+            <i class="fas fa-arrow-left"></i> Regresar a Consultas
+        </a>
+    </div>
+
+    <div class="bg-white shadow-2xl rounded-3xl overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-8 py-5 text-left font-semibold text-gray-700">Nombre Completo</th>
+                    <th class="px-8 py-5 text-left font-semibold text-gray-700">Correo Electrónico</th>
+                    <th class="px-8 py-5 text-left font-semibold text-gray-700">Edad</th>
+                    <th class="px-8 py-5 text-center font-semibold text-gray-700">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+                {% for alumno in curso.alumnos %}
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-8 py-6">
+                        <div class="font-medium text-gray-900">
+                            {{ alumno.nombre }} {{ alumno.apaterno }} {{ alumno.amaterno or '' }}
+                        </div>
+                    </td>
+                    <td class="px-8 py-6 text-gray-700">{{ alumno.email }}</td>
+                    <td class="px-8 py-6 text-gray-700">{{ alumno.edad }} años</td>
+                    <td class="px-8 py-6 text-center">
+                        <form method="POST" 
+                              action="{{ url_for('consultas.eliminar_inscripcion_desde_consulta') }}" 
+                              style="display:inline;">
+                            {{ form.csrf_token }}
+                            <input type="hidden" name="alumno_id" value="{{ alumno.id }}">
+                            <input type="hidden" name="curso_id" value="{{ curso.id }}">
+                            <button type="submit"
+                                    onclick="return confirm('¿Eliminar inscripción de {{ alumno.nombre }} {{ alumno.apaterno }}? Esta acción no se puede deshacer.')"
+                                    class="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium hover:underline transition-all">
+                                <i class="fas fa-trash"></i>
+                                Eliminar Inscripción
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="py-20 text-center">
+                        <div class="flex flex-col items-center">
+                            <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500 text-lg">No hay alumnos inscritos en este curso todavía.</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

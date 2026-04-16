@@ -3,8 +3,11 @@
 {% block content %}
 
 <div class="max-w-7xl mx-auto">
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Gestión de Inscripciones</h1>
+    <div class="flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Consultas</h1>
+            <p class="text-gray-600 mt-1">Ver alumnos inscritos por curso</p>
+        </div>
     </div>
 
     <div class="bg-white shadow-2xl rounded-3xl overflow-hidden">
@@ -12,8 +15,8 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-5 text-left font-semibold text-gray-700">Curso</th>
-                    <th class="px-6 py-5 text-left font-semibold text-gray-700">Maestro</th>
-                    <th class="px-6 py-5 text-left font-semibold text-gray-700">Alumnos Inscritos</th>
+                    <th class="px-6 py-5 text-left font-semibold text-gray-700">Maestro Asignado</th>
+                    <th class="px-6 py-5 text-left font-semibold text-gray-700">Total Alumnos Inscritos</th>
                     <th class="px-6 py-5 text-center font-semibold text-gray-700">Acciones</th>
                 </tr>
             </thead>
@@ -29,21 +32,23 @@
                         {% endif %}
                     </td>
                     <td class="px-6 py-5">
-                        <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        <span class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
                             {{ curso.alumnos.count() }} alumnos
                         </span>
                     </td>
                     <td class="px-6 py-5 text-center">
-                        <a href="{{ url_for('inscripciones.nueva_inscripcion') }}?curso_id={{ curso.id }}" 
-                           class="text-green-600 hover:text-green-700 flex items-center gap-1 transition-colors font-medium">
-                            <i class="fas fa-user-plus"></i> Inscribir
+                        <a href="{{ url_for('consultas.alumnos_por_curso', curso_id=curso.id) }}" 
+                           class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-2xl text-sm font-medium transition-all">
+                            <i class="fas fa-users"></i>
+                            Ver Alumnos Inscritos
                         </a>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="4" class="py-16 text-center text-gray-500">
-                        No hay cursos registrados aún.
+                    <td colspan="4" class="py-20 text-center text-gray-500">
+                        <i class="fas fa-inbox text-6xl mb-4 text-gray-300"></i>
+                        <p class="text-lg">No hay cursos registrados aún.</p>
                     </td>
                 </tr>
                 {% endfor %}

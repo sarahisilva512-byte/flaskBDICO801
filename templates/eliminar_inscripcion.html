@@ -8,30 +8,31 @@
         <div class="mx-auto w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mb-4">
             <i class="fas fa-exclamation-triangle text-4xl"></i>
         </div>
-        <h2 class="text-3xl font-bold text-red-600 mb-2">¿Eliminar Curso?</h2>
+        <h2 class="text-3xl font-bold text-red-600 mb-2">¿Eliminar Inscripción?</h2>
         <p class="text-gray-600 text-lg">Esta acción no se puede deshacer.</p>
     </div>
 
-    <form action="{{ url_for('cursos.eliminar_curso') }}" method="POST" novalidate>
-        <input type="hidden" name="id" value="{{ curso.id }}">
+    <form action="{{ url_for('consultas.eliminar_inscripcion_desde_consulta') }}" method="POST" novalidate>
+        {{ form.csrf_token }}   <!-- ← Esto es lo que faltaba -->
+
+        <input type="hidden" name="alumno_id" value="{{ alumno_id }}">
+        <input type="hidden" name="curso_id" value="{{ curso_id }}">
 
         <div class="bg-gray-50 rounded-2xl p-8 mb-10">
-            <p class="text-lg font-medium text-gray-800 mb-2">Curso:</p>
-            <p class="text-xl text-gray-700">{{ curso.nombre }}</p>
-            {% if curso.maestro %}
-            <p class="text-sm text-gray-500 mt-2">
-                Maestro: {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}
-            </p>
-            {% endif %}
+            <p class="text-lg font-medium text-gray-800">Alumno:</p>
+            <p class="text-xl text-gray-700">{{ alumno_nombre }} {{ alumno_apaterno }}</p>
+            
+            <p class="text-lg font-medium text-gray-800 mt-6">Curso:</p>
+            <p class="text-xl text-gray-700">{{ curso_nombre }}</p>
         </div>
 
         <div class="flex gap-4">
             <button type="submit"
                     class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 rounded-2xl transition-all duration-200"
-                    onclick="return confirm('¿Estás seguro de eliminar este curso? Esta acción es irreversible.')">
-                Sí, Eliminar Curso
+                    onclick="return confirm('¿Estás completamente seguro de eliminar esta inscripción?')">
+                Sí, Eliminar Inscripción
             </button>
-            <a href="{{ url_for('cursos.cursos') }}"
+            <a href="{{ url_for('consultas.alumnos_por_curso', curso_id=curso_id) }}"
                class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-2xl text-center transition-all duration-200">
                 Cancelar
             </a>

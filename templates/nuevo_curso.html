@@ -2,26 +2,34 @@
 
 {% block content %}
 
-<div class="max-w-lg mx-auto bg-white shadow-xl rounded-2xl p-8 mt-10">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Registrar Nuevo Curso</h2>
+<div class="max-w-lg mx-auto bg-white shadow-2xl rounded-3xl p-10 mt-10">
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Nuevo Curso</h2>
 
-    <form action="{{ url_for('cursos.cursos') }}" method="POST" novalidate>
-        {{ form.csrf_token }}   <!-- ← Ahora sí existe -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="mb-8 px-6 py-4 rounded-2xl text-center font-medium
+                            {% if category == 'success' %}bg-green-100 text-green-700{% endif %}
+                            {% if category == 'danger' %}bg-red-100 text-red-700{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('cursos.nuevo_curso') }}" method="POST" novalidate>
+        {{ form.csrf_token }}
 
         <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-                Nombre del Curso
-            </label>
-            <input type="text" name="nombre" required 
-                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del Curso</label>
+            <input type="text" name="nombre" required
+                   class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500">
         </div>
 
-        <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-                Maestro Asignado
-            </label>
-            <select name="maestro_id" required 
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none">
+        <div class="mb-8">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Asignar Maestro</label>
+            <select name="maestro_id" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500">
                 <option value="">-- Selecciona un maestro --</option>
                 {% for maestro in maestros %}
                 <option value="{{ maestro.id }}">
@@ -31,13 +39,13 @@
             </select>
         </div>
 
-        <div class="flex gap-4 mt-10">
-            <button type="submit" 
-                    class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 rounded-xl">
-                Guardar Curso
+        <div class="flex gap-4">
+            <button type="submit"
+                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-2xl transition-all">
+                Crear Curso
             </button>
-            <a href="{{ url_for('cursos.cursos') }}" 
-               class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-xl text-center">
+            <a href="{{ url_for('cursos.cursos') }}"
+               class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-4 rounded-2xl text-center transition-all">
                 Cancelar
             </a>
         </div>
