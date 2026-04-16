@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
-
 {% block content %}
-
 <div class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-6xl mx-auto px-6">
-       
+     
         <!-- Header -->
         <div class="text-center mb-16">
             <h1 class="text-5xl font-bold text-gray-800 mb-4">Sistema Escolar</h1>
@@ -13,9 +11,9 @@
             </p>
         </div>
 
-        <!-- Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
+        <!-- Cards - Ahora con 5 tarjetas bien distribuidas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+          
             <!-- Alumnos -->
             <a href="{{ url_for('alumnos.alumnos') }}"
                class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
@@ -64,8 +62,19 @@
                 </div>
             </a>
 
+            <!-- Consultas -->
+            <a href="{{ url_for('consultas.consultas') }}"
+               class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <div class="h-56 bg-indigo-500 flex items-center justify-center">
+                    <i class="fas fa-search text-8xl text-white"></i>
+                </div>
+                <div class="p-8 text-center">
+                    <h3 class="text-3xl font-semibold text-gray-800 mb-2">Consultas</h3>
+                    <p class="text-gray-600">Ver alumnos por curso</p>
+                </div>
+            </a>
+
         </div>
     </div>
 </div>
-
 {% endblock %}
