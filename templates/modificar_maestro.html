@@ -4,7 +4,6 @@
 <div class="max-w-lg mx-auto bg-white shadow-2xl rounded-3xl p-10 mt-10">
     <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Modificar Maestro</h2>
 
-    <!-- Mensajes flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -22,7 +21,7 @@
         
         <input type="hidden" name="id" value="{{ request.args.get('id') }}">
 
-        <!-- Matrícula en solo lectura (no se puede cambiar) -->
+        
         <div class="mb-6">
             <label class="block text-gray-700 text-sm font-medium mb-2">Matrícula</label>
             <input type="text" 

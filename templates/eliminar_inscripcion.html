@@ -13,7 +13,7 @@
     </div>
 
     <form action="{{ url_for('consultas.eliminar_inscripcion_desde_consulta') }}" method="POST" novalidate>
-        {{ form.csrf_token }}   <!-- ← Esto es lo que faltaba -->
+        {{ form.csrf_token }}   
 
         <input type="hidden" name="alumno_id" value="{{ alumno_id }}">
         <input type="hidden" name="curso_id" value="{{ curso_id }}">
